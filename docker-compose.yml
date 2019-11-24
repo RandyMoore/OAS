@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  python-flask-server:
+    build:
+      context: ./openapi/python_flask
+    volumes:
+      - ./static:/usr/src/app/public
+    ports:
+      - "80:8080"
+
+  swagger-ui:
+    build:
+      context: ./openapi
+      dockerfile: SwaggerUI_Dockerfile
+    volumes:
+      - ./openapi:/usr/share/nginx/html/volume
+    ports:
+      - "8080:8080"

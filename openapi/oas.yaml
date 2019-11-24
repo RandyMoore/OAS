@@ -1,0 +1,89 @@
+openapi: "3.0.2"
+info:
+  version: "1.0.0"
+  title: "OAS Example"
+paths:
+  /bands:
+    get:
+      description: Get the bands
+      operationId: bands
+      responses:
+        '200':
+          description: List of Bands
+          content:
+            application/json:
+              schema:
+                type: array
+                description: List of Bands
+                items:
+                  $ref: '#/components/schemas/Band'
+  /{resource}:
+    get:
+      description: Serves static files
+      operationId: home
+      responses:
+        '200':
+          description: Successfully loaded html page.
+    parameters:
+      - name: resource
+        in: path
+        description: Name of resource to fetch
+        schema:
+          type: string
+components:
+  schemas:
+    Band:
+      type: object
+      properties:
+# python-flask generator does not generate a model for this, BOO!
+#        members:
+#          type: array
+#          items:
+#            oneOf:
+#              - $ref: '#/components/schemas/Guitarist'
+#              - $ref: '#/components/schemas/Singer'
+#              - $ref: '#/components/schemas/Drummer'
+        name:
+          type: string
+          description: Name of the band
+        guitarist:
+          $ref: '#/components/schemas/Guitarist'
+        singer:
+          $ref: '#/components/schemas/Singer'
+        drummer:
+          $ref: '#/components/schemas/Drummer'
+    Member:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+    Guitarist:
+      allOf:
+        - $ref: '#/components/schemas/Member'
+        - type: object
+          properties:
+            axe:
+              type: string
+              description: The favorite guitar type
+              enum: ['stratocaster', 'mandolin', 'banjo', 'air']
+    Singer:
+      allOf:
+        - $ref: '#/components/schemas/Member'
+        - type: object
+          properties:
+            hair_length:
+              type: integer
+              description: Length of hair in inches
+    Drummer:
+      allOf:
+        - $ref: '#/components/schemas/Member'
+        - type: object
+          properties:
+            head_banger:
+              type: boolean
+              description: If the drummer uses their head to keep the beat
+servers:
+  - url: http://localhost
+    description: The generated Flask server of python-flask service in docker-compose.yml

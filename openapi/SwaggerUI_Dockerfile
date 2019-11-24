@@ -1,0 +1,5 @@
+FROM swaggerapi/swagger-ui:v3.24.2
+
+COPY oas.yaml /usr/share/nginx/html/volume/oas.yaml
+ENV URL "volume/oas.yaml"
+CMD ["sh", "/usr/share/nginx/run.sh"]
