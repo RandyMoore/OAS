@@ -50,12 +50,12 @@ def bands():  # noqa: E501
     return jsonify([ragers, smooth_actors])
 
 
-def home(resource):
-    """home
+def static(resource):
+    """static
 
     Serves static files # noqa: E501
 
-    :param resource: Name of resource to fetch, defaults to index.html
+    :param resource: Name of resource to fetch
     :type resource: str
 
     :rtype: None

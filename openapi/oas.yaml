@@ -20,10 +20,10 @@ paths:
   /{resource}:
     get:
       description: Serves static files
-      operationId: home
+      operationId: static
       responses:
         '200':
-          description: Successfully loaded html page.
+          description: Static file found, returned
     parameters:
       - name: resource
         in: path
