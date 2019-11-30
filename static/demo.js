@@ -1,6 +1,4 @@
 import DefaultApi from './api/DefaultApi'
-import ApiClient from './ApiClient'
-import Band from './model/Band'
 
 let body = document.body
 body.innerHTML += 'Calling the API...<br/>'
@@ -15,7 +13,6 @@ function handle(error, data, response) {
 }
 
 (new DefaultApi()).bands(handle)  // Calls the API passing above callback function
-
 
 
 
